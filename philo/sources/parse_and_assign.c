@@ -6,7 +6,7 @@
 /*   By: ibenhaim <ibenhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 11:39:07 by ibenhaim          #+#    #+#             */
-/*   Updated: 2023/06/19 14:04:34 by ibenhaim         ###   ########.fr       */
+/*   Updated: 2023/06/23 18:18:00 by ibenhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int	alloc_and_assign(t_data *data)
 	data->philosophers = malloc(sizeof(t_philo) * data->nb_philo);
 	if (!data->philosophers)
 		return (error_manager(MALLOC_ERROR));
-	data->forks = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
-	if (!data->forks)
+	data->m_forks = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
+	if (!data->m_forks)
 	{
 		free(data->philosophers);
 		return (error_manager(MALLOC_ERROR));

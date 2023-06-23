@@ -6,7 +6,7 @@
 /*   By: ibenhaim <ibenhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 19:52:51 by ibenhaim          #+#    #+#             */
-/*   Updated: 2023/06/14 13:34:46 by ibenhaim         ###   ########.fr       */
+/*   Updated: 2023/06/23 18:18:03 by ibenhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,11 @@ typedef struct s_philo {
 	long			last_eat;
 	long			last_sleep;
 	long			start_eating;
-	pthread_mutex_t	*own_fork;
-	pthread_mutex_t	*right_fork;
+	int				fork;
+	int				own_fork;
+	int				*right_fork;
+	pthread_mutex_t	*m_own_fork;
+	pthread_mutex_t	*m_right_fork;
 }	t_philo;
 
 typedef struct s_data
@@ -58,7 +61,8 @@ typedef struct s_data
 	int				nb_times_philo_must_eat;
 	long			init_time;
 	t_philo			*philosophers;
-	pthread_mutex_t	*forks;
+	int				*fork;
+	pthread_mutex_t	*m_forks;
 	pthread_mutex_t	data_mutex;
 }				t_data;
 
