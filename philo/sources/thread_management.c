@@ -6,7 +6,7 @@
 /*   By: ibenhaim <ibenhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 15:06:19 by ibenhaim          #+#    #+#             */
-/*   Updated: 2023/07/11 14:06:26 by ibenhaim         ###   ########.fr       */
+/*   Updated: 2023/07/11 18:22:34 by ibenhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	routine(t_philo *philo)
 		return (eat(philo));
 	else if (philo->activity == SLEEPING)
 		return (sleeping(philo));
-
 	return (1);
 }
 
@@ -56,6 +55,7 @@ void	*philosopher(void *carac)
 	t_philo	*philo;
 
 	philo = (t_philo *)carac;
+	printf("bonjour\n");
 	wait_philos(philo);
 	philo->last_eat = philo->data->init_time;
 	philo->time_printed = philo->last_eat;
@@ -83,8 +83,10 @@ int	spawn_philos(t_data *data)
 			philosopher, (void *)&data->philosophers[i]);
 	}
 	init_forks(data);
+	usleep(500);
 	pthread_mutex_lock(&data->data_mutex);
 	data->init_time = get_time();
 	pthread_mutex_unlock(&data->data_mutex);
+	usleep(1000);
 	return (1);
 }

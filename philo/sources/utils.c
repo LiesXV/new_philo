@@ -6,7 +6,7 @@
 /*   By: ibenhaim <ibenhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 12:51:20 by ibenhaim          #+#    #+#             */
-/*   Updated: 2023/07/11 11:36:04 by ibenhaim         ###   ########.fr       */
+/*   Updated: 2023/07/11 16:50:34 by ibenhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	end_simulation_by_death(t_philo *philo)
 
 int	print(t_philo *philo, char *str)
 {
-	philo->time_printed = get_time();
 	pthread_mutex_lock(&philo->data->data_mutex);
+	philo->time_printed = get_time();
 	if (philo->data->is_alive)
 	{
 		printf("%ld %d %s\n", philo->time_printed \

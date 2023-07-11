@@ -6,7 +6,7 @@
 /*   By: ibenhaim <ibenhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 19:52:51 by ibenhaim          #+#    #+#             */
-/*   Updated: 2023/07/11 14:06:08 by ibenhaim         ###   ########.fr       */
+/*   Updated: 2023/07/11 16:52:19 by ibenhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_data
 	int				*fork;
 	pthread_mutex_t	*m_forks;
 	pthread_mutex_t	data_mutex;
+
 }				t_data;
 
 int			think(t_philo *philo);
@@ -93,5 +94,6 @@ int			eat(t_philo *philo);
 int			sleeping(t_philo *philo);
 int			think(t_philo *philo);
 void		wait(unsigned long long time_ms);
+
 
 #endif
