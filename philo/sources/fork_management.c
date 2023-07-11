@@ -6,7 +6,7 @@
 /*   By: ibenhaim <ibenhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 17:53:18 by ibenhaim          #+#    #+#             */
-/*   Updated: 2023/06/23 18:19:41 by ibenhaim         ###   ########.fr       */
+/*   Updated: 2023/07/11 14:23:41 by ibenhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int	lock_forks(t_philo *philo)
 					return (unlock_forks_to_eat(philo), 0);
 				*philo->right_fork = 0;
 			}
+			else
+				return (lock_forks(philo));
 			pthread_mutex_unlock(philo->m_right_fork);
 		}
 	}
@@ -108,28 +110,20 @@ int	lock_forks(t_philo *philo)
 // 	return (0);
 // }
 
-void	init_forks(t_philo *philo)
+void	init_forks(t_data *data)
 {
-	if (philo->data->nb_philo == 1)
+	int	i;
+
+	i = data->nb_philo - 1;
+	data->philosophers[i].m_own_fork = &data->m_forks[i];
+	data->philosophers[i].own_fork = 1;
+	while (i-- > 0)
 	{
-		philo->m_own_fork = &philo->data->m_forks[philo->id];
-		philo->own_fork = 1;
-		philo->right_fork = NULL;
-		printf("[philo %d] own -> %p right -> %p\n", philo->id + 1, &philo->m_own_fork, &philo->m_right_fork);
-		return ;
+		data->philosophers[i].m_own_fork = &data->m_forks[i];
+		data->philosophers[i].m_right_fork = &data->m_forks[i + 1];
+		data->philosophers[i].own_fork = 1;
+		data->philosophers[i].right_fork = &data->philosophers[i + 1].own_fork;
 	}
-	else if (philo->id < philo->data->nb_philo - 1)
-	{
-		philo->m_own_fork = &philo->data->m_forks[philo->id];
-		philo->m_right_fork = &philo->data->m_forks[philo->id + 1];
-		philo->own_fork = 1;
-		philo->right_fork = &philo->data->philosophers[philo->id + 1].own_fork;
-		printf("[philo %d] own z-> %p right -> %p\n", philo->id + 1, &philo->m_own_fork, &philo->m_right_fork);
-		return ;
-	}
-	philo->m_own_fork = &philo->data->m_forks[philo->id];
-	philo->m_right_fork = &philo->data->m_forks[0];
-	philo->own_fork = 1;
-	philo->right_fork = &philo->data->philosophers[0].own_fork;
-	printf("[philo %d] own -> %p right -> %p\n", philo->id + 1, &philo->m_own_fork, &philo->m_right_fork);
+	data->philosophers[data->nb_philo - 1].m_right_fork = &data->m_forks[0];
+	data->philosophers[data->nb_philo - 1].right_fork = &data->philosophers[0].own_fork;
 }

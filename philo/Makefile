@@ -6,12 +6,12 @@
 #    By: ibenhaim <ibenhaim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/04 13:10:41 by ibenhaim          #+#    #+#              #
-#    Updated: 2023/06/23 13:51:48 by ibenhaim         ###   ########.fr        #
+#    Updated: 2023/07/11 11:22:29 by ibenhaim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	philo
-FLAGS		=	-Wall -Werror -Wextra -pthread -O2 -fsanitize=thread -g3
+FLAGS		=	-Wall -Werror -Wextra -pthread -O2
 
 HEADER		=	${INCLUDES}philo.h
 SRCS		=	${SOURCES}main.c ${SOURCES}ft_atoi.c ${SOURCES}error_management.c ${SOURCES}thread_management.c \

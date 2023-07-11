@@ -6,7 +6,7 @@
 /*   By: ibenhaim <ibenhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 12:12:52 by ibenhaim          #+#    #+#             */
-/*   Updated: 2023/06/23 18:17:57 by ibenhaim         ###   ########.fr       */
+/*   Updated: 2023/07/11 13:42:49 by ibenhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	init_mutex(t_data *data)
 
 	i = -1;
 	while (++i < data->nb_philo)
+	{
 		pthread_mutex_init(&data->m_forks[i], NULL);
+		printf("i : %d = %p\n", i, &data->m_forks[i]);
+	}
 	pthread_mutex_init(&data->data_mutex, NULL);
 }
 

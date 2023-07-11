@@ -6,7 +6,7 @@
 /*   By: ibenhaim <ibenhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 15:06:19 by ibenhaim          #+#    #+#             */
-/*   Updated: 2023/06/19 17:32:02 by ibenhaim         ###   ########.fr       */
+/*   Updated: 2023/07/11 14:06:26 by ibenhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	display_end_game(t_data *data)
 	if (!data->nb_times_philo_must_eat)
 		return (0);
 	pthread_mutex_lock(&data->data_mutex);
-	printf("All philosophers have eaten at least %d times.\n", \
+	printf("%ld All philosophers have eaten at least %d times.\n", \
+		get_time() - data->init_time, \
 		data->nb_times_philo_must_eat);
 	pthread_mutex_unlock(&data->data_mutex);
 	return (1);
@@ -55,19 +56,17 @@ void	*philosopher(void *carac)
 	t_philo	*philo;
 
 	philo = (t_philo *)carac;
-	init_forks(philo);
 	wait_philos(philo);
 	philo->last_eat = philo->data->init_time;
+	philo->time_printed = philo->last_eat;
 	while (1)
 	{
 		if (!routine(philo))
 			break ;
+		else if (philo->data->nb_times_philo_must_eat && \
+			philo->nb_of_time_eat == philo->data->nb_times_philo_must_eat)
+			return (NULL);
 	}
-	// fork_gestion_with_one_meal(philo);
-	// if (philo->time_to_wait && philo->activity == EATING)
-	// 	unlock_forks_to_eat(philo);
-	// while (get_time() - philo->time_backup < philo->time_to_wait)
-	// 	usleep(0);
 	end_simulation_by_death(philo);
 	return (NULL);
 }
@@ -83,7 +82,7 @@ int	spawn_philos(t_data *data)
 		pthread_create(&data->philosophers[i].thread_id, NULL, \
 			philosopher, (void *)&data->philosophers[i]);
 	}
-	usleep(500);
+	init_forks(data);
 	pthread_mutex_lock(&data->data_mutex);
 	data->init_time = get_time();
 	pthread_mutex_unlock(&data->data_mutex);

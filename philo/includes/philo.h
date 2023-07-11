@@ -6,7 +6,7 @@
 /*   By: ibenhaim <ibenhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 19:52:51 by ibenhaim          #+#    #+#             */
-/*   Updated: 2023/06/23 18:18:03 by ibenhaim         ###   ########.fr       */
+/*   Updated: 2023/07/11 14:06:08 by ibenhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_philo {
 	int				activity;
 	int				nb_of_time_eat;
 	long			last_eat;
+	long			time_printed;
 	long			last_sleep;
 	long			start_eating;
 	int				fork;
@@ -87,10 +88,10 @@ void		unlock_forks_to_eat(t_philo *philo);
 int			fork_gestion_with_one_meal(t_philo *philo);
 void		destroy_all_mutex(t_data *data);
 int			lock_forks(t_philo *philo);
-void		init_forks(t_philo *philo);
+void		init_forks(t_data *data);
 int			eat(t_philo *philo);
 int			sleeping(t_philo *philo);
 int			think(t_philo *philo);
-
+void		wait(unsigned long long time_ms);
 
 #endif
