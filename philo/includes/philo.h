@@ -6,7 +6,7 @@
 /*   By: ibenhaim <ibenhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 19:52:51 by ibenhaim          #+#    #+#             */
-/*   Updated: 2023/07/11 16:52:19 by ibenhaim         ###   ########.fr       */
+/*   Updated: 2023/07/12 14:00:56 by ibenhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_philo {
 	int				fork;
 	int				own_fork;
 	int				*right_fork;
+	pthread_mutex_t	data_philo;
 	pthread_mutex_t	*m_own_fork;
 	pthread_mutex_t	*m_right_fork;
 }	t_philo;
@@ -68,6 +69,8 @@ typedef struct s_data
 
 }				t_data;
 
+
+int			is_dead(t_philo *philo);
 int			think(t_philo *philo);
 int			routine(t_philo *philo);
 int			alloc_and_assign(t_data *data);
@@ -88,12 +91,11 @@ void		end_simulation_by_death(t_philo *philo);
 void		unlock_forks_to_eat(t_philo *philo);
 int			fork_gestion_with_one_meal(t_philo *philo);
 void		destroy_all_mutex(t_data *data);
-int			lock_forks(t_philo *philo);
+int			lock_first_fork(t_philo *philo);
 void		init_forks(t_data *data);
 int			eat(t_philo *philo);
 int			sleeping(t_philo *philo);
 int			think(t_philo *philo);
 void		wait(unsigned long long time_ms);
-
 
 #endif
