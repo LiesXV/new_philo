@@ -6,7 +6,7 @@
 /*   By: ibenhaim <ibenhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 11:38:01 by ibenhaim          #+#    #+#             */
-/*   Updated: 2023/07/12 16:45:04 by ibenhaim         ###   ########.fr       */
+/*   Updated: 2023/07/13 11:25:27 by ibenhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	is_dead(t_philo *philo)
 	if (get_time() - philo->last_eat > philo->data->time_to_die)
 	{
 		pthread_mutex_unlock(&philo->data_philo);
-		if (!print(philo, "is dead"))
+		if (!print(philo, "died"))
 			return (0);
 		return (1);
 	}
@@ -71,7 +71,7 @@ int	main(int argc, char **argv)
 		return (2);
 	init_mutex(&data);
 	spawn_philos(&data);
-	usleep(10000);
+	usleep(50000);
 	if (monitoring(&data) == 0)
 	{
 		pthread_mutex_lock(&data.data_mutex);

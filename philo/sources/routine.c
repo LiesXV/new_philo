@@ -6,7 +6,7 @@
 /*   By: ibenhaim <ibenhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 13:20:45 by ibenhaim          #+#    #+#             */
-/*   Updated: 2023/07/12 16:39:46 by ibenhaim         ###   ########.fr       */
+/*   Updated: 2023/07/13 11:20:34 by ibenhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ int	eat(t_philo *philo)
 	philo->start_eating = get_time();
 	if (!print(philo, "is eating"))
 		return (0);
-	wait(philo->data->time_to_eat);
-	unlock_forks_to_eat(philo);
 	pthread_mutex_lock(&philo->data_philo);
 	philo->last_eat = get_time();
 	philo->nb_of_time_eat++;
 	philo->activity = SLEEPING;
 	pthread_mutex_unlock(&philo->data_philo);
+	wait(philo->data->time_to_eat);
+	unlock_forks_to_eat(philo);
 	return (1);
 }

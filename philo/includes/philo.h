@@ -6,7 +6,7 @@
 /*   By: ibenhaim <ibenhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 19:52:51 by ibenhaim          #+#    #+#             */
-/*   Updated: 2023/07/12 14:00:56 by ibenhaim         ###   ########.fr       */
+/*   Updated: 2023/07/13 13:06:57 by ibenhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ typedef struct s_data
 	pthread_mutex_t	data_mutex;
 
 }				t_data;
-
 
 int			is_dead(t_philo *philo);
 int			think(t_philo *philo);

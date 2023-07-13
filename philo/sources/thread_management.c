@@ -6,7 +6,7 @@
 /*   By: ibenhaim <ibenhaim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 15:06:19 by ibenhaim          #+#    #+#             */
-/*   Updated: 2023/07/12 16:11:15 by ibenhaim         ###   ########.fr       */
+/*   Updated: 2023/07/13 11:46:11 by ibenhaim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static void	wait_philos(t_philo *philo)
 		usleep(1000);
 }
 
-
 int	routine(t_philo *philo)
 {
 	if (philo->activity == THINKING)
@@ -55,7 +54,6 @@ void	*philosopher(void *carac)
 	t_philo	*philo;
 
 	philo = (t_philo *)carac;
-	// printf("bonjour\n");
 	wait_philos(philo);
 	pthread_mutex_lock(&philo->data_philo);
 	philo->last_eat = philo->data->init_time;
